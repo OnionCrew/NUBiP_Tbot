@@ -1,5 +1,6 @@
 import telebot
 from telebot import types
+import time
 
 
 bot = telebot.TeleBot('6135314118:AAHkksZtMolECCUQXFGexkJNYqbhrDpYyWA')
@@ -26,21 +27,32 @@ def botgpt(message):
         
 def chatgpt(message):
         import openai
+
+
         
-        openai.api_key = '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'
+        openai.api_key = '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'
 
         print(message.text)
-        response = openai.Completion.create(
-            model = "text-davinci-003",
-            prompt= message.text,
-            temperature = 0.5,
-            max_tokens = 500,
-            top_p=1.0,
-            frequency_penalty=0.5,
-            presence_penalty=0.0,
-        )
 
-        bot.send_message(message.chat.id, text=response['choices'][0]['text'])       
+        try:
+                response = openai.Completion.create(
+                            model = "text-davinci-003",
+                            prompt= message.text,
+                            temperature = 0.5,
+                            max_tokens = 500,
+                            top_p=1.0,
+                            frequency_penalty=0.5,
+                            presence_penalty=0.0,
+                        )
+
+                bot.send_message(message.chat.id, text=response['choices'][0]['text']) 
+        except:
+              time.sleep(10) //
+              bot.send_message(message.chat.id, text= 'Зачекайте ще трохи...')
+              chatgpt(message)
+ 
+
+           
       
  
         
