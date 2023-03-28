@@ -30,7 +30,7 @@ def chatgpt(message):
 
 
         
-        openai.api_key = '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'
+        openai.api_key = ''
 
         print(message.text)
 
